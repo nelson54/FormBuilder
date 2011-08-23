@@ -39,7 +39,7 @@ formSettings = {
 	    	length: 256,
 	    	required: true,
 	    	error: "string",
-	    	options: states,
+	    	options: [],
 	    	show: true
 	    },
 	    {

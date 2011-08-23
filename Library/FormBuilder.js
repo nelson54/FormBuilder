@@ -171,7 +171,7 @@
 		}
 	});
 	
-	formBuilder.TextField = formField.Field.extend({
+	formBuilder.TextField = formBuilder.Field.extend({
 		defaults: {
 			label : "Unassigned text label",
 			name : "unassignedTextName",
@@ -183,7 +183,7 @@
 		}
 	});
 	
-	formBuilder.SelectField = formField.Field.extend({
+	formBuilder.SelectField = formBuilder.Field.extend({
 		defaults: {
 			label : "Unassigned select label",
 			title : "Unassigned",
@@ -195,7 +195,7 @@
 		}
 	});
 	
-	formBuilder.BooleanField = formField.Field.extend({
+	formBuilder.BooleanField = formBuilder.Field.extend({
 		defaults: {
 			label : "Unassigned boolean label",
 			title : "Unassigned",
@@ -229,7 +229,7 @@
 		}
 	});
 	
-	formBuilder.CheckboxField = formField.Field.extend({
+	formBuilder.CheckboxField = formBuilder.Field.extend({
 		defaults: {
 			label : "Unassigned checkbox label",
 			title : "Unassigned",
@@ -258,7 +258,7 @@
 		}
 	});
 
-	formBuilder.CheckboxListField = formField.Field.extend({
+	formBuilder.CheckboxListField = formBuilder.Field.extend({
 		defaults: {
 			label : "Unassigned checkbox list label",
 			title : "Unassigned",
@@ -294,7 +294,7 @@
 		}
 	});
 	
-	formBuilder.RadioListField = formField.Field.extend({
+	formBuilder.RadioListField = formBuilder.Field.extend({
 		defaults: {
 			label : "Unassigned radio button list label",
 			title : "Unassigned",
@@ -327,7 +327,7 @@
 		}
 	});
 	
-	formBuilder.DateField = formField.Field.extend({
+	formBuilder.DateField = formBuilder.Field.extend({
 	    defaults: {
 			label : "Unassigned date label",
 			name : "unassignedDateName",
@@ -339,7 +339,7 @@
 	    }
 	});
 	
-	formBuilder.DateRangeField = formField.Field.extend({
+	formBuilder.DateRangeField = formBuilder.Field.extend({
 		defaults: {
 			label : "Unassigned date range label",
 			title : "Unassigned",
@@ -350,7 +350,7 @@
 		}
 	});
 	
-	formBuilder.LocationField = formField.Field.extend({
+	formBuilder.LocationField = formBuilder.Field.extend({
 		defaults: {
 			label : "Unassigned location label",
 			title : "Unassigned",
@@ -374,7 +374,7 @@
 		}
 	});
 	
-	formBuilder.PhoneField = formField.Field.extend({
+	formBuilder.PhoneField = formBuilder.Field.extend({
 		defaults: {
 			label : "Unassigned option label",
 			title : "Unassigned",

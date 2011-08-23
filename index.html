@@ -21,16 +21,57 @@
 
 <script type="text/javascript" src="./Library/FormBuilder.js">//</script>
 
-<script type="text/javascript" src="./Sample/formSettings.js.js">//</script>
+<script type="text/javascript" src="./Sample/formSettings.js">//</script>
 
 <script type="text/javascript">
-	
-var FormFields = Backbone.Collection.extend({
-  model: function(attrs, options){ 
-  	new formBuilder[attr.type](attrs, options);
-  }
-});
 
-fields = new FormFields(formSettings.fields);
+var Template = function ( source ) {
+	this.source = source;
+	this.template = Handlebars.compile(source);
+	
+	this.render = function (context) {
+	    return ( this.template(context) );
+	}
+},
+TemplateFactory = function(TemplateConstructor, url, callback){
+	this.getTemplate = function(type){
+		return (this.templates[type]);
+	}
+	
+	var loadTemplates = function(url, callback, self) {
+	    $(document.body).append('<IFRAME id="templates" />');
+	    $('iframe#templates').attr('src', url);
+	
+	    $('iframe#templates').load(function() 
+	    {
+	        callback(this, self);
+	    });
+	}
+	
+	loadTemplates(url, function(iframe, factory){
+		var templates = new Object();
+		$(iframe).contents().find('script[type="text/x-handlebars-template"]').each(function(index){
+			var datatype = $(this).attr('title');
+			var html = $(this).html();
+			templates[datatype] = new TemplateConstructor(html);
+		})
+		factory.templates = templates;
+		callback();
+		return (factory);
+	}, this)
+},
+
+FormFields = Backbone.Collection.extend({
+  model: function(attrs, options){ 
+  	new formBuilder[attrs.type](attrs, options);
+  }
+}),
+
+templateFactory = new TemplateFactory(Template, './Sample/templates.html', 
+	function(){
+		fields = new FormFields(); 
+		fields.add(formSettings.fields);
+	}
+);
 
 </script>
