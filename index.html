@@ -56,7 +56,7 @@ TemplateFactory = function(TemplateConstructor, url, callback){
 templateFactory = new TemplateFactory(Template, 'Sample/templates.html', 
 	function(){
 		form = new formBuilder.Form(formSettings);
-    $("body").append( form.render() );
+    	$("body").append( form.render() );
 	}
 );
 
