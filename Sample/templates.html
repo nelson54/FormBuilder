@@ -39,7 +39,7 @@
 	</div>
 </script>
 
-<script id="form-radiolist-template" type="text/x-handlebars-template" title="navigation">
+<script id="form-navigation-template" type="text/x-handlebars-template" title="navigation">
 <div>
 	<h2>Navigation</h2>
 	<ul>
@@ -50,19 +50,36 @@
 </div>
 </script>
 
+<script id="form-sectionHeader-template" type="text/x-handlebars-template" title="SectionHeader">
+  <h3>{{name}}</h3>
+</script>
+
 <script id="form-radiolist-template" type="text/x-handlebars-template" title="errorMessage">
 	<label for="{{name}}" title="{{errorMessageName}}" class="error">{{errorMessage}}</label>
 </script>
 
 <script id="section-template" type="text/x-handlebars-template" title="formSection">
-	<h3>{{title}}</h3>
-	{{#if subheader}}<p><em>{{subheader}}</em></p>{{/if}}
 		<ul>
-			{{#each fieldsHtml}}
+      {{#if title}}
+      <li><h2>{{title}}</h2></li>
+      {{/if}}
+      
+      {{#if subheader}}
+      <li><p><em>{{subheader}}</em></p></li>
+      {{/if}}
+      
+			{{#each fieldsHTML}}
 			<li>
 				{{{this}}}
 			</li>
 			{{/each}}
+      
+      {{#if hasSubmitButton}}
+  		<li>
+				<input type="submit" value="{{submitButtonText}}"
+			</li>
+      {{/if}}
+      
 		</ul>
 </script>
 

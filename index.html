@@ -33,44 +33,30 @@ var Template = function ( source ) {
 	    return ( this.template(context) );
 	}
 },
+
 TemplateFactory = function(TemplateConstructor, url, callback){
-	this.getTemplate = function(type){
-		return (this.templates[type]);
-	}
-	
-	var loadTemplates = function(url, callback, self) {
-	    $(document.body).append('<IFRAME id="templates" />');
-	    $('iframe#templates').attr('src', url);
-	
-	    $('iframe#templates').load(function() 
-	    {
-	        callback(this, self);
-	    });
-	}
-	
-	loadTemplates(url, function(iframe, factory){
-		var templates = new Object();
-		$(iframe).contents().find('script[type="text/x-handlebars-template"]').each(function(index){
-			var datatype = $(this).attr('title');
-			var html = $(this).html();
-			templates[datatype] = new TemplateConstructor(html);
-		})
-		factory.templates = templates;
-		callback();
-		return (factory);
-	}, this)
+    this.getTemplate = function(type){
+            return (this.templates[type]);
+    }
+
+    var templates = this.templates = {};
+
+    $.get( url, function ( data ) {
+        $( data ).filter('script[type="text/x-handlebars-template"]').each( function(){
+            var $this = $( this ),
+            datatype = $this.attr('title'),
+            html = $this.html();
+
+            templates[ datatype ] = new TemplateConstructor( html );
+        });
+        callback();
+    });
 },
 
-FormFields = Backbone.Collection.extend({
-  model: function(attrs, options){ 
-  	new formBuilder[attrs.type](attrs, options);
-  }
-}),
-
-templateFactory = new TemplateFactory(Template, './Sample/templates.html', 
+templateFactory = new TemplateFactory(Template, 'Sample/templates.html', 
 	function(){
-		fields = new FormFields(); 
-		fields.add(formSettings.fields);
+		form = new formBuilder.Form(formSettings);
+    $("body").append( form.render() );
 	}
 );
 

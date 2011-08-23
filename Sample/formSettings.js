@@ -1,9 +1,16 @@
 formSettings = {
+  title : "Sample Form",
+  hasSubmitButton : true,
+  submitButtonText : "Submit",
 	options : {
 		colors: ["Red", "Green", "Purple", "Yellow"],
 		states: {none:"", mi: "Michigan", oh: "Ohio"}
 	},
 	fields : [
+      {
+        name: "Form Section",
+        type: "SectionHeader"
+      },
 	    {
 	    	name: "firstName",
 	        label: "First Name",
