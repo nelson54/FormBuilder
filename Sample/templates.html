@@ -1,0 +1,176 @@
+<html>
+<script id="form-page-template" type="text/x-handlebars-template" title="landingPage">
+	<div>
+		<header>
+			<h1>{{title}}</h1>
+		</header>
+		<div>
+			{{#each paragraphs}}
+				<p>{{this}}</p>
+			{{/each}}
+			<ul>
+				{{#each listItems}}
+				<li>{{this}}</li>
+				{{/each}}
+			</ul>
+			{{subheader}}
+
+		</div>
+	</div>
+</script>
+
+<script id="form-page-template" type="text/x-handlebars-template" title="formPage">
+	<div>
+		<header>
+			<h1>{{title}}</h1>
+		</header>
+		<div>
+		{{navigation}}
+			<form action="" method="" id="newResumeForm">
+				<input type="hidden" value="{{name}}" />
+				{{#each sectionsHtml}}
+					{{{this}}}
+				{{/each}}
+				<ul>
+					<input type="button" value="Continue" onclick="navigation.currentPage.submit(); return(false);" />
+				</ul>
+			</form>
+		</div>
+	</div>
+</script>
+
+<script id="form-navigation-template" type="text/x-handlebars-template" title="navigation">
+<div>
+	<h2>Navigation</h2>
+	<ul>
+		{{#each order}}
+		<li><a href="#!/{{this.name}}">{{this.name}}</a></li>
+		{{/each}}
+	</ul>
+</div>
+</script>
+
+<script id="form-sectionHeader-template" type="text/x-handlebars-template" title="SectionHeader">
+  <h3>{{name}}</h3>
+</script>
+
+<script id="form-radiolist-template" type="text/x-handlebars-template" title="errorMessage">
+	<label for="{{name}}" title="{{errorMessageName}}" class="error">{{errorMessage}}</label>
+</script>
+
+<script id="section-template" type="text/x-handlebars-template" title="formSection">
+		<ul>
+      {{#if title}}
+      <li><h2>{{title}}</h2></li>
+      {{/if}}
+      
+      {{#if subheader}}
+      <li><p><em>{{subheader}}</em></p></li>
+      {{/if}}
+      
+			{{#each fieldsHTML}}
+			<li>
+				{{{this}}}
+			</li>
+			{{/each}}
+      
+      {{#if hasSubmitButton}}
+  		<li>
+				<input type="submit" value="{{submitButtonText}}"
+			</li>
+      {{/if}}
+      
+		</ul>
+</script>
+
+<script id="form-page-template" type="text/x-handlebars-template" title="formAlert">
+	<div class="alert">
+			{{body}}
+	</div>
+</script>
+
+<script id="form-radiolist-template" type="text/x-handlebars-template" title="formRadioList">
+	<label for="{{name}}">{{label}}</label>
+	{{#each elements}}
+		<p title="{{name}}-field"><label for="{{name}}">{{this.label}}</label><input type="radio" name="{{../name}}" value="{{this.value}}" {{#if checked}}checked="checked"{{/if}} /></p>
+	{{/each}}
+	<p title="{{name}}-error"></p>
+</script>
+
+<script id="form-checkboxlist-template" type="text/x-handlebars-template" title="formCheckboxList">
+	<label for="{{name}}">{{label}}</label><br />
+	{{#each elements}}
+		<input type="checkbox" name="{{this.name}}" value="{{this.value}}" {{#if checked}}checked="checked"{{/if}} /><label for="{{this.name}}">{{this.label}}</label>
+	{{/each}}
+	<p title="{{name}}-error"></p>
+</script>
+
+<script id="form-option-template" type="text/x-handlebars-template" title="formSelect">
+	<p><label for="{{name}}">{{this.label}}</label><br />
+	<select name="{{name}}">
+	{{#each options}}
+		<option value="{{this.value}}" {{#if selected}}checked="selected"{{/if}}>{{this.title}}</option>
+	{{/each}}</p>
+	</select>
+	<p title="{{name}}-error"></p>
+</script>
+
+<script id="form-checkbox-template" type="text/x-handlebars-template" title="formCheckbox">
+	<p><label>{{this.label}}</label><input type="checkbox" name="{{name}}" {{#if checked}}checked="checked"{{/if}} value="{{this.value}}" /></p>
+	<p title="{{name}}-error"></p>
+</script>
+
+<script id="form-dateRange-template" type="text/x-handlebars-template" title="formDateRange">
+		<p>
+			<label>{{this.label}}</label><br />
+			<label class="secondry" for="{{fromName}}">From</label>
+			<input type="text" class="date" name="{{fromName}}" value="{{this.fromValue}}" />
+			<label class="secondry" for="{{toName}}">To</label>
+			<input type="text" class="date" name="{{toName}}" value="{{this.toValue}}" /><label class="format">yyyy-mm-dd</label>
+		</p>
+		<p title="{{name}}-error"></p>
+</script>
+
+<script id="form-dateRange-template" type="text/x-handlebars-template" title="formLocation">
+		<p>
+			<label>{{label}}</label><br />
+			<input type="text" class="date" name="{{name}}-city" value="{{value.city}}" />, 
+			<select name="{{name}}-state">
+					<option>&nbsp;&nbsp;&nbsp;</option>
+				{{#each options}}
+					<option>{{this}}</option>
+				{{/each}}
+			</select>
+		</p>
+		<p title="{{name}}-error"></p>
+</script>
+
+<script id="form-date-template" type="text/x-handlebars-template" title="formDate">
+		<p>
+			<label>{{this.label}}</label><br />
+			<input type="text" class="date" name="{{name}}" value="{{this.currentValue}}" />
+			<label class="format">yyyy-mm-dd</label>
+		</p>
+		<p title="{{name}}-error"></p>
+</script>
+
+<script id="form-boolean-template" type="text/x-handlebars-template" title="formBoolean">
+		<p><label>{{this.label}}</label><br />
+		{{#each options}}
+			<input type="radio" value="{{this.value}}" name="{{../name}}" {{#if this.checked}}checked="checked"{{/if}} /><label>{{label}}</label>
+		{{/each}}
+		</p>
+		<p title="{{name}}-error"></p>
+</script>
+
+<script id="form-phone-template" type="text/x-handlebars-template" title="formPhone">
+		<p><label>{{this.label}}</label><br />
+		(<input name="{{name}}-phone-1" type="text" maxlength="3" value="{{value.num1}}" size="2"  />)<input name="{{name}}-phone-2" type="text" maxlength="3" value="{{value.num2}}" size="2"  />-<input name="{{name}}-phone-3" type="text" maxlength="4" value="{{value.num3}}" size="3"  /></p>
+		<p title="{{name}}-error"></p>
+</script>
+
+<script id="form-text-template" type="text/x-handlebars-template" title="formText">
+		<p><label>{{this.label}}</label><br /><input type="text" name="{{name}}" value="{{this.currentValue}}" /></p>
+		<p title="{{name}}-error"></p>
+</script>
+</html>

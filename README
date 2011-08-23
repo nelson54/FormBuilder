@@ -1,0 +1,9 @@
+FormBuilder.js
+
+Generates forms with *validation* from JSON fields using backbone.js, underscore.js, handlebars.js, and jQuery.
+
+Current Issues/Todo:
+While validation fields are built into the API the related events are not linked to the form Object because the form object has no validate method currently.
+
+Templating is coupled to a Static Template Factory and template object.  These are easy to reimplement but I am going to decouple them using dependency injection via closures.
+
